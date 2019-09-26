@@ -22,6 +22,7 @@ type mtk_6620_launcher ,domain;
 # ==============================================
 
 allow mtk_6620_launcher wmt_prop:property_service set;
+allow mtk_6620_launcher dac_override;
 allow mtk_6620_launcher init:unix_stream_socket connectto;
 allow mtk_6620_launcher property_socket:sock_file write;
 allow mtk_6620_launcher stpwmt_device:chr_file { read write ioctl open };
