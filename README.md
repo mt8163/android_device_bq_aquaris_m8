@@ -1,4 +1,4 @@
-Device Tree For BQ Aquaris M8 (ALPHA)
+Device Tree For BQ Aquaris M8
 =================================================
 About Device:
 ![alt text](http://i1.wp.com/www.blogtecnologia.es/wp-content/uploads/2017/02/bq.jpg)
@@ -20,3 +20,8 @@ Rear Camera  | 5.0 MP
 Front Camera | 2.0 MP
 
 This branch is for building CyanogenMod 13.0/LineageOS 13.0
+
+### BUILD ###
+```source ./build/envsetup.sh
+lunch cm_aquaris_m8-userdebug
+brunch cm_aquaris_m8-userdebug -j12```
