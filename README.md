@@ -24,4 +24,5 @@ This branch is for building CyanogenMod 13.0/LineageOS 13.0
 ### BUILD ###
 ```source ./build/envsetup.sh
 lunch cm_aquaris_m8-userdebug
-brunch cm_aquaris_m8-userdebug -j12```
+brunch cm_aquaris_m8-userdebug -j12
+```
