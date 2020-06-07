@@ -4,10 +4,6 @@ DEVICE_VENDOR := vendor/bq/aquaris_m8
 # Device overlay
 DEVICE_PACKAGE_OVERLAYS += $(DEVICE_BASE)/overlay
 
-# Install init.d scripts
-PRODUCT_COPY_FILES += \
-    $(DEVICE_BASE)/configs/99exfat-support:system/etc/init.d/99exfat-support
-
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # Device uses high-density artwork where available
@@ -56,7 +52,7 @@ PRODUCT_PACKAGES += \
     libtinyxml \
     libaudioroute
 
-#OMX    
+# OMX    
 PRODUCT_PACKAGES += \
     libdashplayer
 
@@ -67,27 +63,15 @@ PRODUCT_PACKAGES += \
 # Graphics
 PRODUCT_PACKAGES += \
     libion \
-    #libccci_util \
-    #ccci_fsd \
-    #ccci_mdinit \
     libgui_ext \
     libui_ext \
-    #libgralloc_extra \
     libcap
 
 # Memtrack
 PRODUCT_PACKAGES += \
     memtrack.mt8163
 
-# Lights
-#PRODUCT_PACKAGES += \
-    #lights.mt8163
-
-# Power
-#PRODUCT_PACKAGES += \
-	#power.default
-
-# network
+# Network
 PRODUCT_PACKAGES += \
     netd
     
@@ -98,10 +82,7 @@ PRODUCT_PACKAGES += \
 
 # Shims
 PRODUCT_PACKAGES += \
-libshim_vold \
-libshim_media \
-libshim_audio
-
+    libshim_audio
 
 # Zygote
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -110,20 +91,21 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 # ADB on boot
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	ro.secure=0
-        ro.adb.secure=0
-        security.perf_harden=0
-        ro.allow.mock.location=1
-        persist.sys.usb.config=adb,mtp
+    ro.adb.secure=0
+    security.perf_harden=0
+    ro.allow.mock.location=1
+    persist.sys.usb.config=adb,mtp
 
+# EXFAT Support
 WITH_EXFAT := true
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
-
-# call dalvik heap config
+# Call dalvik heap config
 $(call inherit-product, frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap.mk)
 
-# call hwui memory config
+# Call hwui memory config
 $(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
 
+# Call vendor config
 $(call inherit-product-if-exists, vendor/bq/aquaris_m8/aquaris_m8-vendor.mk)
