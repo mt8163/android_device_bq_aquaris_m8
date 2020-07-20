@@ -126,6 +126,7 @@ include $(CLEAR_VARS)
 LOCAL_SRC_FILES := misc/program_binary_service_shim.cpp
 
 LOCAL_MODULE := libshim_program_binary_service
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/include
 
 LOCAL_MODULE_TAGS := optional
 LOCAL_PROPRIETARY_MODULE := true
