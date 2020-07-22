@@ -62,6 +62,11 @@ ro.sf.lcd_density=220
 rild.libpath=mtk-ril.so
 rild.libargs=-d /dev/ttyC0
 
+# HDMI
+ro.mtk_hdmi_support=1
+ro.mtk_hdmi_hdcp_support=1
+ro.mtk_internal_hdmi_support=1
+
 # RIL
 ro.radio.noril=1
 ril.telephony.mode=0
