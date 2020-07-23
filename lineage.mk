@@ -14,12 +14,12 @@
 # limitations under the License.
 #
 
-LINEAGE_VENDOR := vendor/lineage
+BOOTLEGGERS_VENDOR := vendor/bootleggers 
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
-$(call inherit-product, $(LINEAGE_VENDOR)/config/common_full_tablet_wifionly.mk)
+$(call inherit-product, $(BOOTLEGGERS_VENDOR)/config/common_full_tablet_wifionly.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # Inherit from device
@@ -29,7 +29,7 @@ $(call inherit-product, device/bq/aquaris_m8/device.mk)
 PRODUCT_CHARACTERISTICS := tablet
 
 PRODUCT_DEVICE := aquaris_m8
-PRODUCT_NAME := lineage_aquaris_m8
+PRODUCT_NAME := bootleg_aquaris_m8
 PRODUCT_BRAND := google
 PRODUCT_MODEL := Aquaris M8
 PRODUCT_MANUFACTURER := bq

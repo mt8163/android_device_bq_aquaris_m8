@@ -1,3 +1,3 @@
-add_lunch_combo lineage_aquaris_m8-userdebug
-add_lunch_combo lineage_aquaris_m8-user
-add_lunch_combo lineage_aquaris_m8-eng
+add_lunch_combo bootleg_aquaris_m8-userdebug
+add_lunch_combo bootleg_aquaris_m8-user
+add_lunch_combo bootleg_aquaris_m8-eng
