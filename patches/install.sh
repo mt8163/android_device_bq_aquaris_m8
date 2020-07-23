@@ -1,22 +1,24 @@
-#!/bin/sh
+#!/bin/bash
 
-echo $1
-rootdirectory="$PWD"
-# ---------------------------------
+DEVICE="aquaris_m8"
+BRAND="bq"
+BASE="device/${BRAND}/${DEVICE}/patches"
+DIRS="bionic build/make/core build/soong frameworks/av frameworks/base frameworks/native hardware/interfaces system/core system/sepolicy system/bt external/wpa_supplicant_8"
+MAIN_DIR=$(pwd)
 
-dirs="bionic build/make/core build/soong frameworks/av frameworks/base frameworks/native hardware/interfaces system/core system/sepolicy system/bt external/wpa_supplicant_8"
+# Colors
+CYAN='\033[0;96m'
+RC='\033[0m'
 
-# red + nocolor
-RED='\033[0;31m'
-NC='\033[0m'
-
-for dir in $dirs ; do
-	cd $rootdirectory
-	cd $dir
-    echo -e "\n${RED}Applying ${NC}$dir ${RED}patches...${NC}\n"
-	git apply -v $rootdirectory/device/bq/aquaris_m8/patches/$dir/*.patch
+# Apply patches
+for DIR in $DIRS ; do
+    echo -e "\n${CYAN}Applying ${DIR} patches...\n${RC}"
+    PATCHES=$(ls ${BASE}/${DIR}/)
+    for PATCH in $PATCHES ; do
+        FPATCH="${MAIN_DIR}/${BASE}/${DIR}/${PATCH}"
+        cd $DIR
+        patch -p1 < $FPATCH
+        cd $MAIN_DIR
+    done
 done
-
-# -----------------------------------
-echo -e "Done !\n"
-cd $rootdirectory
+echo -e "${CYAN}Done!${RC}"
