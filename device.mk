@@ -13,6 +13,9 @@ $(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-hwui
 # HIDL (HAL Interface Definition Language)
 -include $(DEVICE_PATH)/hidl.mk
 
+# The device is a tablet
+TARGET_IS_TABLET := true
+
 # GC
 PRODUCT_TAGS += dalvik.gc.type-precise
 
