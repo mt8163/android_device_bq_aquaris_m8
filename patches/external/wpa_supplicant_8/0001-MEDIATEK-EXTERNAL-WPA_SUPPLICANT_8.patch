@@ -1,5 +1,9 @@
+---
+ wpa_supplicant/bss.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
 diff --git a/wpa_supplicant/bss.c b/wpa_supplicant/bss.c
-index 914bd5d..481115b 100644
+index 914bd5d9..481115b5 100644
 --- a/wpa_supplicant/bss.c
 +++ b/wpa_supplicant/bss.c
 @@ -449,6 +449,10 @@ static struct wpa_bss * wpa_bss_add(struct wpa_supplicant *wpa_s,
@@ -13,3 +17,6 @@ index 914bd5d..481115b 100644
  	dl_list_add_tail(&wpa_s->bss, &bss->list);
  	dl_list_add_tail(&wpa_s->bss_id, &bss->list_id);
  	wpa_s->num_bss++;
+-- 
+2.17.1
+

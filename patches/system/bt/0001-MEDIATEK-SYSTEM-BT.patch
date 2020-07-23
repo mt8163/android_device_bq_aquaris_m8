@@ -1,3 +1,8 @@
+---
+ device/src/controller.cc     | 4 ++++
+ hci/src/hci_packet_parser.cc | 5 +++--
+ 2 files changed, 7 insertions(+), 2 deletions(-)
+
 diff --git a/device/src/controller.cc b/device/src/controller.cc
 index 33b9696b6..30b442981 100644
 --- a/device/src/controller.cc
@@ -13,7 +18,6 @@ index 33b9696b6..30b442981 100644
    ble_supported = last_features_classic_page_index >= 1 &&
                    HCI_LE_HOST_SUPPORTED(features_classic[1].as_array);
    if (ble_supported) {
-
 diff --git a/hci/src/hci_packet_parser.cc b/hci/src/hci_packet_parser.cc
 index a6b61f094..c9815fe41 100644
 --- a/hci/src/hci_packet_parser.cc
@@ -39,4 +43,7 @@ index a6b61f094..c9815fe41 100644
 +  if (*page_number_ptr >= feature_pages_count) return; // just stop here and don't crash
    STREAM_TO_ARRAY(feature_pages[*page_number_ptr].as_array, stream,
                    (int)sizeof(bt_device_features_t));
+ 
+-- 
+2.17.1
 

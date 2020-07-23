@@ -1,0 +1,42 @@
+---
+ core/Makefile        | 6 +++++-
+ core/soong_config.mk | 1 +
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/core/Makefile b/core/Makefile
+index d4a4b5bfe..de06e566c 100644
+--- a/core/Makefile
++++ b/core/Makefile
+@@ -2780,12 +2780,16 @@ else
+ endif
+ endif
+ 
++ifneq ($(BLOCK_BASED_OTA),false)
++    $(INTERNAL_OTA_PACKAGE_TARGET): block_based := --block
++endif
++
+ $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) \
+ 		build/tools/releasetools/ota_from_target_files
+ 	@echo "Package OTA: $@"
+ 	$(hide) PATH=$(foreach p,$(INTERNAL_USERIMAGES_BINARY_PATHS),$(p):)$$PATH MKBOOTIMG=$(MKBOOTIMG) \
+ 	   ./build/tools/releasetools/ota_from_target_files -v \
+-	   --block \
++	   $(block_based) \
+ 	   --extracted_input_target_files $(patsubst %.zip,%,$(BUILT_TARGET_FILES_PACKAGE)) \
+ 	   -p $(HOST_OUT) \
+ 	   -k $(KEY_CERT_PAIR) \
+diff --git a/core/soong_config.mk b/core/soong_config.mk
+index 61fdcf49f..10d89fe77 100644
+--- a/core/soong_config.mk
++++ b/core/soong_config.mk
+@@ -46,6 +46,7 @@ $(SOONG_VARIABLES): FORCE bootleggers_soong
+ 	echo '    "Binder32bit": $(if $(BINDER32BIT),true,false),'; \
+ 	echo '    "DevicePrefer32BitExecutables": $(if $(filter true,$(TARGET_PREFER_32_BIT_EXECUTABLES)),true,false),'; \
+ 	echo '    "UseGoma": $(if $(filter-out false,$(USE_GOMA)),true,false),'; \
++	echo '    "Mtk_hardware": $(if $(filter true,$(BOARD_USES_MTK_HARDWARE)),true,false),'; \
+ 	echo '    "Debuggable": $(if $(filter userdebug eng,$(TARGET_BUILD_VARIANT)),true,false),'; \
+ 	echo '    "Eng": $(if $(filter eng,$(TARGET_BUILD_VARIANT)),true,false),'; \
+ 	echo '    "VendorPath": "$(TARGET_COPY_OUT_VENDOR)",'; \
+-- 
+2.17.1
+

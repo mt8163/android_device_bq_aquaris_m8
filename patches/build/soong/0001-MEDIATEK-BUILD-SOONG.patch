@@ -1,12 +1,3 @@
-From b737c64ed265f4b2c6094f8efbb320e76b99b888 Mon Sep 17 00:00:00 2001
-From: Mister Oyster <oysterized@gmail.com>
-Date: Sun, 3 Sep 2017 16:45:22 +0200
-Subject: [PATCH] build: soong: add BOARD_USES_MTK_HARDWARE (v2)
-
-* now done properly
-* C&Cpp flags
-
-Change-Id: I9affcbc31411c9f1b22ae9ce19e12144012d0cc7
 ---
  android/config.go   | 4 ++++
  android/variable.go | 8 ++++++++
@@ -14,7 +5,7 @@ Change-Id: I9affcbc31411c9f1b22ae9ce19e12144012d0cc7
  3 files changed, 16 insertions(+)
 
 diff --git a/android/config.go b/android/config.go
-index aa0ac82..f4065cb 100644
+index d704067..adc42d9 100644
 --- a/android/config.go
 +++ b/android/config.go
 @@ -519,6 +519,10 @@ func (c *deviceConfig) BtConfigIncludeDir() string {
@@ -29,7 +20,7 @@ index aa0ac82..f4065cb 100644
  	return c.config.ProductVariables.DeviceKernelHeaders
  }
 diff --git a/android/variable.go b/android/variable.go
-index 6113063..2adc563 100644
+index 8446a94..16fac54 100644
 --- a/android/variable.go
 +++ b/android/variable.go
 @@ -69,6 +69,13 @@ type variableProperties struct {
@@ -70,5 +61,5 @@ index c7fcca7..07fdf61 100644
  			if Bool(compiler.Properties.Rtti) {
  				flags.CppFlags = append(flags.CppFlags, "-frtti")
 -- 
-2.14.1
+2.17.1
 

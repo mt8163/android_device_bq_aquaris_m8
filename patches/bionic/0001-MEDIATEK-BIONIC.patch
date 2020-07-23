@@ -1,18 +1,26 @@
-From 500b801b73fd24dd8b9c3e3b594b4a4a9a165719 Mon Sep 17 00:00:00 2001
-From: vishalk17 <vishalkapadi95@gmail.com>
-Date: Sun, 24 Mar 2019 18:47:22 +0000
-Subject: [PATCH 1/2] pthread patch
-
-Change-Id: I95ef08fc1c3ff4e3cb136366319a3eea67ec9bf8
 ---
+ libc/Android.bp           | 1 +
  libc/Android.mk           | 2 ++
  libc/bionic/ndk_cruft.cpp | 9 ++++++++-
  libc/libc.arm.map         | 1 +
  libc/libc.map.txt         | 1 +
  libc/libc.mips.map        | 1 +
  libc/libc.x86.map         | 1 +
- 6 files changed, 14 insertions(+), 1 deletion(-)
+ linker/Android.bp         | 3 ++-
+ 8 files changed, 17 insertions(+), 2 deletions(-)
 
+diff --git a/libc/Android.bp b/libc/Android.bp
+index c339b0451..cd3fec90c 100644
+--- a/libc/Android.bp
++++ b/libc/Android.bp
+@@ -42,6 +42,7 @@ libc_common_flags = [
+     "-Wunused",
+     "-Wno-deprecated-declarations",
+     "-Wframe-larger-than=2048",
++    "-fno-stack-protector",
+ 
+     // Try to catch typical 32-bit assumptions that break with 64-bit pointers.
+     "-Werror=pointer-to-int-cast",
 diff --git a/libc/Android.mk b/libc/Android.mk
 index 888404cf7..7c14eb969 100644
 --- a/libc/Android.mk
@@ -95,6 +103,20 @@ index 145b64ebf..dc4ce9c5b 100644
      __ptrace; # arm x86 mips
      __putlong;
      __putshort;
+diff --git a/linker/Android.bp b/linker/Android.bp
+index 1fcb4f723..f4dbd2de6 100644
+--- a/linker/Android.bp
++++ b/linker/Android.bp
+@@ -115,7 +115,8 @@ cc_binary {
+         },
+     },
+ 
+-    cppflags: ["-Wold-style-cast"],
++    cppflags: ["-Wold-style-cast",
++               "-DUSE_LD_CONFIG_FILE"],
+ 
+     // we are going to link libc++_static manually because
+     // when stl is not set to "none" build system adds libdl
 -- 
 2.17.1
 

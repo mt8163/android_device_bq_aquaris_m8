@@ -1,0 +1,142 @@
+---
+ .../media_plugin/media/openmax/OMX_IVCommon.h | 13 ++++++++++++
+ libs/sensor/Sensor.cpp                        |  8 ++++++++
+ libs/ui/Android.bp                            |  1 -
+ libs/ui/GraphicBuffer.cpp                     | 20 +++++++++++++++++++
+ libs/ui/include/ui/GraphicBuffer.h            |  4 ++++
+ services/sensorservice/SensorService.cpp      |  3 +++
+ 6 files changed, 48 insertions(+), 1 deletion(-)
+
+diff --git a/headers/media_plugin/media/openmax/OMX_IVCommon.h b/headers/media_plugin/media/openmax/OMX_IVCommon.h
+index f9b6f4b0f..a43143fd0 100644
+--- a/headers/media_plugin/media/openmax/OMX_IVCommon.h
++++ b/headers/media_plugin/media/openmax/OMX_IVCommon.h
+@@ -149,6 +149,19 @@ typedef enum OMX_COLOR_FORMATTYPE {
+     OMX_COLOR_Format24BitABGR6666,
+     OMX_COLOR_FormatKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */
+     OMX_COLOR_FormatVendorStartUnused = 0x7F000000, /**< Reserved region for introducing Vendor Extensions */
++
++// MTK
++    OMX_COLOR_FormatVendorMTKYUV = 0x7F000001,
++    OMX_COLOR_FormatVendorMTKYUV_FCM = 0x7F000002,
++    OMX_COLOR_FormatVendorMTKYUV_UFO = 0x7F000003,
++    OMX_COLOR_FormatVendorMTKYUV_10BIT_H = 0x7F000004,
++    OMX_COLOR_FormatVendorMTKYUV_10BIT_V = 0x7F000005,
++    OMX_COLOR_FormatVendorMTKYUV_UFO_10BIT_H = 0x7F000006,
++    OMX_COLOR_FormatVendorMTKYUV_UFO_10BIT_V = 0x7F000007,
++    OMX_MTK_COLOR_FormatYV12 = 0x7F000200,
++    OMX_MTK_COLOR_FormatBitStream = 0x7F000300,
++// end MTK
++
+     /**<Reserved android opaque colorformat. Tells the encoder that
+      * the actual colorformat will be  relayed by the
+      * Gralloc Buffers.
+diff --git a/libs/sensor/Sensor.cpp b/libs/sensor/Sensor.cpp
+index a0e368c7e..7d0b756c4 100644
+--- a/libs/sensor/Sensor.cpp
++++ b/libs/sensor/Sensor.cpp
+@@ -52,6 +52,7 @@ Sensor::Sensor(struct sensor_t const& hwSensor, const uuid_t& uuid, int halVersi
+     mMinDelay = hwSensor.minDelay;
+     mFlags = 0;
+     mUuid = uuid;
++    int mHalVersion = 0; // temporarily store overridden hal version
+ 
+     // Set fifo event count zero for older devices which do not support batching. Fused
+     // sensors also have their fifo counts set to zero.
+@@ -146,6 +147,8 @@ Sensor::Sensor(struct sensor_t const& hwSensor, const uuid_t& uuid, int halVersi
+     case SENSOR_TYPE_PROXIMITY:
+         mStringType = SENSOR_STRING_TYPE_PROXIMITY;
+         mFlags |= SENSOR_FLAG_ON_CHANGE_MODE;
++        mHalVersion = halVersion;
++        halVersion = SENSORS_DEVICE_API_VERSION_1_1;
+         if (halVersion < SENSORS_DEVICE_API_VERSION_1_3) {
+             mFlags |= SENSOR_FLAG_WAKE_UP;
+         }
+@@ -324,6 +327,11 @@ Sensor::Sensor(struct sensor_t const& hwSensor, const uuid_t& uuid, int halVersi
+                     String16(mRequiredPermission));
+         }
+     }
++
++    if (mHalVersion > 0){
++        halVersion = mHalVersion;
++        mHalVersion = 0;
++    }
+ }
+ 
+ Sensor::~Sensor() {
+diff --git a/libs/ui/Android.bp b/libs/ui/Android.bp
+index 59173cbf3..fa9e6cf02 100644
+--- a/libs/ui/Android.bp
++++ b/libs/ui/Android.bp
+@@ -22,7 +22,6 @@ cc_library_shared {
+     clang: true,
+     cppflags: [
+         "-Weverything",
+-        "-Werror",
+ 
+         // The static constructors and destructors in this library have not been noted to
+         // introduce significant overheads
+diff --git a/libs/ui/GraphicBuffer.cpp b/libs/ui/GraphicBuffer.cpp
+index 6235bd6cc..b6169a358 100644
+--- a/libs/ui/GraphicBuffer.cpp
++++ b/libs/ui/GraphicBuffer.cpp
+@@ -57,6 +57,26 @@ GraphicBuffer::GraphicBuffer()
+     handle = NULL;
+ }
+ 
++#ifdef MTK_HARDWARE
++GraphicBuffer::GraphicBuffer(uint32_t inWidth, uint32_t inHeight,
++        PixelFormat inFormat, uint32_t inUsage)
++    : BASE(), mOwner(ownData), mBufferMapper(GraphicBufferMapper::get()),
++      mInitCheck(NO_ERROR), mId(getUniqueId()), mGenerationNumber(0)
++{
++    width  =
++    height =
++    stride =
++    format =
++    usage_deprecated = 0;
++    usage  = 0;
++    layerCount = 0;
++    handle = NULL;
++    std::string requestorName = "<unknown>";
++    mInitCheck = initWithSize(inWidth, inHeight, inFormat, 0,
++            inUsage, std::move(requestorName));
++}
++#endif
++
+ // deprecated
+ GraphicBuffer::GraphicBuffer(uint32_t inWidth, uint32_t inHeight,
+         PixelFormat inFormat, uint32_t inUsage, std::string requestorName)
+diff --git a/libs/ui/include/ui/GraphicBuffer.h b/libs/ui/include/ui/GraphicBuffer.h
+index 95c2d2272..11f3972d5 100644
+--- a/libs/ui/include/ui/GraphicBuffer.h
++++ b/libs/ui/include/ui/GraphicBuffer.h
+@@ -80,6 +80,10 @@ public:
+ 
+     // Create a GraphicBuffer by allocating and managing a buffer internally.
+     // This function is privileged.  See reallocate for details.
++#ifdef MTK_HARDWARE
++    GraphicBuffer(uint32_t inWidth, uint32_t inHeight, PixelFormat inFormat,
++            uint32_t inUsage);
++#endif
+     GraphicBuffer(uint32_t inWidth, uint32_t inHeight, PixelFormat inFormat,
+             uint32_t inLayerCount, uint64_t inUsage,
+             std::string requestorName = "<Unknown>");
+diff --git a/services/sensorservice/SensorService.cpp b/services/sensorservice/SensorService.cpp
+index a1f07b281..ebf0b97fc 100644
+--- a/services/sensorservice/SensorService.cpp
++++ b/services/sensorservice/SensorService.cpp
+@@ -704,7 +704,10 @@ bool SensorService::threadLoop() {
+     } while (!Thread::exitPending());
+ 
+     ALOGW("Exiting SensorService::threadLoop => aborting...");
++#ifdef SENSOR_SERVICE_ABORT
+     abort();
++#endif
++
+     return false;
+ }
+ 
+-- 
+2.17.1
+
