@@ -123,6 +123,9 @@ persist.ygps.enable=0
 # Battery Saver Color (PATCH)
 ro.battery.savermode_color=0xff008080
 
+# GPS
+ro.mtk_gps_support=1
+
 # MediaTek Props
 ro.mtk_deinterlace_support=1
 ro.mtk_sensorhub_support=1
