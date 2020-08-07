@@ -63,20 +63,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/gps/ecc_list.xml:$(TARGET_COPY_OUT_VENDOR)/etc/ecc_list.xml \
     $(LOCAL_PATH)/configs/gps/spn-conf.xml:$(TARGET_COPY_OUT_VENDOR)/etc/spn-conf.xml
 
-# Shim symbols
-PRODUCT_PACKAGES += \
-    libshim_bionic \
-    libshim_atomic \
-    libshim_audio \
-    libshim_omx \
-    libshim_camera \
-    libshim_xlog \
-    libshim_gps \
-    libshim_program_binary_service \
-    libshim_wvm \
-    libshim_drm \
-    libshim_media
-
 # Power
 PRODUCT_PACKAGES += power.mt8163
 
