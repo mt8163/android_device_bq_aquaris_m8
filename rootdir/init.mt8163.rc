@@ -639,7 +639,7 @@ on post-fs-data
 
     # HDMI
     chown media system /dev/hdmitx
-    chmod 0660 /dev/hdmitx
+    chmod 0666 /dev/hdmitx
 
     # almk
     chmod 0440 /dev/mtk_almk
