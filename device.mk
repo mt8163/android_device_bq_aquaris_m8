@@ -250,5 +250,3 @@ PRODUCT_PRODUCT_PROPERTIES += \
 # OTA
 PRODUCT_PRODUCT_PROPERTIES += \
     lineage.updater.uri=https://raw.githubusercontent.com/R0rt1z2/android_lineage_custom_OTA/master/lineageos_aquaris_m8.json
-
-
