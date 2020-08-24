@@ -133,6 +133,9 @@ ro.battery.savermode_color=0xff008080
 # GPS
 ro.mtk_gps_support=1
 
+# OTA
+lineage.updater.uri=https://raw.githubusercontent.com/R0rt1z2/OTA/master/lineageos_aquaris_m8.json
+
 # MediaTek Props
 ro.mtk_deinterlace_support=1
 ro.mtk_sensorhub_support=1
