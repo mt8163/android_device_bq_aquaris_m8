@@ -1162,11 +1162,9 @@ service atcid-daemon-e /system/vendor/bin/atcid
     oneshot
 
 on property:ro.build.type=eng
-    start atci_service
     start atcid-daemon-e
 
 on property:persist.service.atci.autostart=1
-    start atci_service
     start atcid-daemon-u
 
 service audio-daemon /system/vendor/bin/audiocmdservice_atci
