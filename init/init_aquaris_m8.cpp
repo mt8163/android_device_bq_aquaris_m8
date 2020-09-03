@@ -53,7 +53,6 @@
 
 #define SERIAL_LENGTH 19
 
-using android::init::property_set;
 using android::base::GetProperty;
 
 void write_serial(std::string serial) {
