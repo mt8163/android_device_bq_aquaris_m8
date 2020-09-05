@@ -87,6 +87,9 @@ PRODUCT_PACKAGES += \
 # Configstore
 PRODUCT_PACKAGES += android.hardware.configstore@1.1-service
 
+# LiveDisplay (MTK)
+PRODUCT_PACKAGES += vendor.lineage.livedisplay@2.0-service-mediatek
+
 # Tether Packages
 PRODUCT_PACKAGES += \
     android.hardware.tetheroffload.config@1.0 \
