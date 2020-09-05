@@ -251,3 +251,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
     log.tag.launcher_force_rotate=VERBOSE \
     lockscreen.rot_override=true
 
+# Graphics
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.hwui.renderer=opengl
