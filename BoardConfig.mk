@@ -161,7 +161,9 @@ TARGET_LD_SHIM_LIBS := \
     /system/lib/libstagefright_soft_ddpdec.so|libshim_omx.so \
     /system/lib/libMtkOmxVdecEx.so|libshim_omx.so \
     /system/lib/libMtkOmxVenc.so|libshim_omx.so \
-    /system/vendor/bin/nandread|libshim_bionic.so
+    /system/vendor/bin/nandread|libshim_bionic.so \
+    /system/lib/libcam.utils.so|libshim_camera.so \
+    /system/lib64/libcam.utils.so|libshim_camera.so
 
 # Recovery
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/fstab.mt8163
