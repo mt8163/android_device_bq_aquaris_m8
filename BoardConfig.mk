@@ -165,7 +165,11 @@ TARGET_LD_SHIM_LIBS := \
     /system/lib/libcam.utils.so|libshim_camera.so \
     /system/lib64/libcam.utils.so|libshim_camera.so \
     /system/lib/libmtkplayer.so|libshim_bionic.so \
-    /system/lib64/libmtkplayer.so|libshim_bionic.so
+    /system/lib64/libmtkplayer.so|libshim_bionic.so \
+    /system/lib/libmtkjpeg.so|libshim_bionic.so \
+    /system/lib64/libmtkjpeg.so|libshim_bionic.so \
+    /system/lib/libvcodecdrv.so|libshim_bionic.so \
+    /system/lib64/libvcodecdrv.so|libshim_bionic.so
 
 # Recovery
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/fstab.mt8163
