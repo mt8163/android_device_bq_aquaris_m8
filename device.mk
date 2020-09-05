@@ -115,6 +115,9 @@ PRODUCT_PACKAGES += \
     FMRadio \
     libfmcust
 
+# Enable StagefrightCodec 2.0
+PRODUCT_PACKAGES += libstagefright_ccodec
+
 # Audio Packages
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
