@@ -84,6 +84,9 @@ PRODUCT_PACKAGES += \
     android.hardware.health@1.0-impl \
     android.hardware.health@1.0-service
 
+# Configstore
+PRODUCT_PACKAGES += android.hardware.configstore@1.1-service
+
 # Tether Packages
 PRODUCT_PACKAGES += \
     android.hardware.tetheroffload.config@1.0 \
