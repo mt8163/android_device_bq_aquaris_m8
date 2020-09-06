@@ -197,6 +197,9 @@ BOARD_MEDIATEK_USES_GPS := true
 BOARD_CONNECTIVITY_VENDOR := MediaTek
 BOARD_CONNECTIVITY_MODULE := conn_soc 
 
+# GPS Legacy Blob Support
+TARGET_PROCESS_SDK_VERSION_OVERRIDE := /system/xbin/mnld=27
+
 # Suppress MTK audio blob error message flag
 SUPPRESS_MTK_AUDIO_BLOB_ERR_MSG := true
 
