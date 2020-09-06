@@ -19,25 +19,22 @@ Display | 1280 x 800 pixels, 8"
 Rear Camera  | 5.0 MP
 Front Camera | 2.0 MP
 
-This branch it's ONLY for building LineageOS 15.1.
+This branch it's ONLY for building LineageOS 16.0.
 
 ### BUILD ###
-If you are interested in building LineageOS 15.1 for the BQ Aquaris M8, check our [build guide](https://github.com/mt8163/android_vendor_bq_mt8163/blob/lineage-15.1/README.md), it will probably help you.
+If you are interested in building LineageOS 16.0 for the BQ Aquaris M8, check our [build guide](https://github.com/mt8163/android_vendor_bq_mt8163/blob/lineage-16.0/README.md), it will probably help you.
 
 ### WORKING ###
 - Boots.
-- DRM (L3).
 - Bluetooth.
 - Wi-Fi.
 - Camera.
 - Video Recording.
-- Sound Recording (microphone).
 - Hardware Composer.
 - Gralloc.
 - Sensors (Light & Accelerometer).
 - Lights (LEDs, etc).
-- MTP/ADB.
-- OMX (SW).
+- ADB.
 - Sound/Audio.
 - Online/Offline charging (kpoc).
 - FM Radio.
@@ -45,16 +42,21 @@ If you are interested in building LineageOS 15.1 for the BQ Aquaris M8, check ou
 - LiveDisplay.
 - Gatekeeper/Keymaster.
 - Thermal.
-- GPS.
 
 ### NOT WORKING ###
 - Encryption.
-- OMX (HW).
+- OMX (HW/SW).
 - HDMI.
+- DRM.
+- Audio/Sound.
+- Sound Recording.
+- Storage.
+- MTP.
+- GPS.
 
 ### SPECIAL THANKS ###
 - Kaijones23, huckleberrypie, JMPF6 and t0x1cSH for the help.
 - ibilux, danielhk and vishalk95/17 for the patches.
 - carlitos900 for the Kernel.
 - The M.A.D team.
-- xcore995.
+- xcore995 and SamarV121.
