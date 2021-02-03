@@ -1,7 +1,7 @@
 Android Device Tree For BQ Aquaris M8 (aquaris_m8)
 =================================================
 About Device:
-![alt text](http://i1.wp.com/www.blogtecnologia.es/wp-content/uploads/2017/02/bq.jpg)
+![alt text](https://img.pccomponentes.com/articles/10/106105/a3.jpg)
 =====================================
 Basic   | Spec Sheet
 -------:|:-------------------------
